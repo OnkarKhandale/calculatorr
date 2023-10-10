@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Percentage Calculator with Grades</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add custom CSS -->
+    <style>
+        body {
+            background-color: #594a72;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #c2c2c2;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(255, 5, 5, 0.1);
+        }
+
+        h3 {
+            color: #2580ff;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        #calculateButton {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        #calculateButton:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            background-color: #e38f8f;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Student Grade Calculator</h3>
+            </div>
+            <div class="col-md-6">
+                <form id="percentageCalculator">
+                    <h3>Enter Scores</h3>
+                    <div class="mb-3">
+                        <label for="subject1" class="form-label">Subject 1</label>
+                        <input type="number" class="form-control" id="subject1" placeholder="Enter marks">
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject2" class="form-label">Subject 2</label>
+                        <input type="number" class="form-control" id="subject2" placeholder="Enter marks">
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject3" class="form-label">Subject 3</label>
+                        <input type="number" class="form-control" id="subject3" placeholder="Enter marks">
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject4" class="form-label">Subject 4</label>
+                        <input type="number" class="form-control" id="subject4" placeholder="Enter marks">
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject5" class="form-label">Subject 5</label>
+                        <input type="number" class="form-control" id="subject5" placeholder="Enter marks">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="calculateButton">Show Percentage</button>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        $(document).ready(function () {
+            $("#calculateButton").click(function () {
+                // Get input values
+                var subject1 = parseFloat($("#subject1").val());
+                var subject2 = parseFloat($("#subject2").val());
+                var subject3 = parseFloat($("#subject3").val());
+                var subject4 = parseFloat($("#subject4").val());
+                var subject5 = parseFloat($("#subject5").val());
+
+                // Calculate total marks and percentage
+                var totalMarks = subject1 + subject2 + subject3 + subject4 + subject5;
+                var percentage = (totalMarks / 500) * 100;
+
+                // Determine the grade based on the percentage
+                var grade = getGrade(percentage);
+
+                // Display the result
+                var resultText = `<h3>Your Result</h3>
+                                <p>Out of 500 your Total is ${totalMarks.toFixed(2)}
+                                And Percentage is ${percentage.toFixed(2)}%</p>
+                                <p>Your Grade is  ${grade}</p>`;
+
+                $("#result").html(resultText);
+            });
+
+            // Function to determine the grade based on the percentage
+            function getGrade(percentage) {
+                if (percentage >= 90) {
+                    return "A+";
+                } else if (percentage >= 80) {
+                    return "A";
+                } else if (percentage >= 70) {
+                    return "B";
+                } else if (percentage >= 60) {
+                    return "C";
+                } else if (percentage >= 50) {
+                    return "D";
+                } else {
+                    return "Fail";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
